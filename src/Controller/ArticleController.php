@@ -36,7 +36,7 @@ class ArticleController extends AbstractController
     public function new(Request $request)
     {
         $article = new Article();
-        $from = $this->createFormBuilder($article)->
+        $form = $this->createFormBuilder($article)->
         add('title', TextType::class,
             array('attr' => array('class' => 'from-control')))
             ->add('body', TextareaType::class,
@@ -44,10 +44,23 @@ class ArticleController extends AbstractController
                 => array('class' => 'form-control')))
             ->add('save', SubmitType::class, array(
             'label' => 'Create',
-            'attr' => array('class' => 'btn btn-primary mt-3')
+            'attr' => array('class' => 'btn btn-primary mt-3 btn-sm')
         ))->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()&& $form->isValid()){
+            $article = $form-> getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('article_list');
+        }
+
+
         return $this->render('articles/new.html.twig', array(
-            'form' => $from->createView()
+            'form' => $form->createView()
         ));
     }
     /**
