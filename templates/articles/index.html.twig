@@ -6,7 +6,7 @@
 {% block body %}
     <h1> Articles </h1>
     {% if articles %}
-        <table class="table-striped">
+        <table class=" table table-striped" id="articles">
             <thead>
             <tr>
                 <th>Articles Title</th>
@@ -19,6 +19,9 @@
                 <tr>
                     <td>{{ article.title }}</td>
                     <td><a href="/article/{{ article.id }}" class="btn btn-dark btn-sm">Show</a></td>
+                    <td><a href="#" class="btn btn-danger delete-article btn-sm" data-id="{
+                    article.id
+                    }">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -27,4 +30,8 @@
     {% else %}
         <p>No articles found</p>
     {% endif %}
+{% endblock %}
+{% block javascripts %}
+    <script src="/js/main.js">
+    </script>
 {% endblock %}
