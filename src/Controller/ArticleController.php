@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use \Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,10 +17,9 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/" , name="article_list")
-     * @Method({"GET"})
+     *
      */
-
-    public function index()
+public function index()
     {
         // return new Response('<html><body>Hello</body></html>');
         $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
@@ -75,6 +75,24 @@ class ArticleController extends AbstractController
         return $this->render('articles/show.html.twig', array('article' => $articles));
 
     }
+
+    /**
+     * @Route("/article/delete/${id}" )
+     * @Method({"DELETE"})
+     */
+
+    public function delete(Request $request , $id){
+        $article = $this->getDoctrine()->
+        getRepository(Article::class)->find($id);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        $response = new Response();
+        $response ->send();
+    }
+
 //    /**
 //     * @Route("/article/save")
 //     * @Method({"POST"})

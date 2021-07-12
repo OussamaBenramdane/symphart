@@ -221,6 +221,9 @@
     "symfony/orm-pack": {
         "version": "v2.1.0"
     },
+    "symfony/password-hasher": {
+        "version": "v5.3.3"
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.23.0"
     },
@@ -267,6 +270,12 @@
     "symfony/runtime": {
         "version": "v5.3.3"
     },
+    "symfony/security-core": {
+        "version": "v5.3.3"
+    },
+    "symfony/security-csrf": {
+        "version": "v5.3.3"
+    },
     "symfony/service-contracts": {
         "version": "v2.4.0"
     },
@@ -297,6 +306,19 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.1"
+    },
+    "symfony/validator": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "d902da3e4952f18d3bf05aab29512eb61cabd869"
+        },
+        "files": [
+            "./config/packages/test/validator.yaml",
+            "./config/packages/validator.yaml"
+        ]
     },
     "symfony/var-dumper": {
         "version": "v5.3.3"
